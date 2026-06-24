@@ -1,13 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 import Dashboard from './pages/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute';
+import Login from './pages/Login';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
         <Route 
           path="/dashboard" 
           element={

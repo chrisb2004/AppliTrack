@@ -8,7 +8,7 @@ p {
     cursor: default;
 }
 
-.login-page-container {
+.sign-in-page-container {
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -45,7 +45,7 @@ input {
     padding: 0;
 }
 
-.login-button {
+.sign-in-button {
     border: none;
     width: 16rem;
     height: 2.5rem;
