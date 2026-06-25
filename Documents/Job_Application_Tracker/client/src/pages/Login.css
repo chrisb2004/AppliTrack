@@ -1,0 +1,73 @@
+h1 {
+    color: black;
+    cursor: default;
+}
+
+p {
+    font-size: 13px;
+    cursor: default;
+}
+
+.login-page-container {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    width: fit-content; 
+    padding: 4rem;
+    gap: 1rem;
+    margin: auto;
+    border-radius: 1rem;
+    align-items: center;
+}
+
+input { 
+    width: 16rem;
+    height: 2.5rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgb(0, 0, 0, 0.5);
+}
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 16rem;
+}
+
+.password-wrapper button {
+    position: absolute;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.login-button {
+    border: none;
+    width: 16rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    background-color: rgb(53, 97, 255);
+    color: white;
+    cursor: pointer;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background-color: black;
+}

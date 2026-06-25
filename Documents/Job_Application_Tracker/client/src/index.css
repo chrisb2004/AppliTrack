@@ -1,22 +1,30 @@
+* {
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  padding: 0;
+  margin: 0;
+}
+
 :root {
-  color-scheme: light dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  font: 18px/145% system-ui, sans-serif;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-size: 16px;
 }
 
 body {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  background-color: rgb(53, 97, 255);
 }
 
 #root {
   min-height: 100svh;
+  display: flex;
 }
