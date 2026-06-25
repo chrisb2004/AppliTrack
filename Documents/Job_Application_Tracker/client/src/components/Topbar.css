@@ -1,12 +1,10 @@
 .topbar {
   display: flex;
   align-items: center;
-  justify-content: center;
+  
   position: relative;
   height: 64px;
   padding: 0 24px;
-  background: #fff;
-  border-bottom: 1px solid #e0e0e0;
   flex-shrink: 0;
 }
 
@@ -15,10 +13,10 @@
   align-items: center;
   gap: 12px;
   width: 100%;
-  max-width: 720px;
-  height: 48px;
+  max-width: 500px;
+  height: 44px;
   padding: 0 16px;
-  background: #f1f3f4;
+  background-color: #f1f3f4cd;
   border-radius: 24px;
   transition: background 0.15s, box-shadow 0.15s;
 }
@@ -67,6 +65,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: box-shadow 0.15s;
+  border: 2px solid white;
 }
 
 .topbar__avatar:hover {

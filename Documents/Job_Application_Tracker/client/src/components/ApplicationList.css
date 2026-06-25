@@ -4,6 +4,8 @@
   flex: 1;
   overflow: hidden;
   background: #fff;
+  margin: 0 1rem 1rem 1rem;
+  border-radius: 1rem;
 }
 
 .app-list__toolbar {

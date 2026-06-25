@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import Navigator from '../components/Navigator';
 import Topbar from '../components/Topbar';
 import ApplicationList from '../components/ApplicationList';
 import ApplicationPanel from '../components/ApplicationPanel';
@@ -77,18 +78,23 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard">
-      <Topbar search={search} onSearchChange={setSearch} />
-      <ApplicationList
-        applications={filteredApplications}
-        selectedIds={selectedIds}
-        statusFilters={statusFilters}
-        onSelectAll={handleSelectAll}
-        onSelectOne={handleSelectOne}
-        onStatusFiltersChange={setStatusFilters}
-        onRowClick={setPanelApplicationId}
-        onStatusChange={handleStatusChange}
-        onAddApplication={handleAddApplication}
-      />
+      <Navigator applications={applications} onNewApplication={handleAddApplication} />
+
+      <div className="dashboard__main">
+        <Topbar search={search} onSearchChange={setSearch} />
+        <ApplicationList
+          applications={filteredApplications}
+          selectedIds={selectedIds}
+          statusFilters={statusFilters}
+          onSelectAll={handleSelectAll}
+          onSelectOne={handleSelectOne}
+          onStatusFiltersChange={setStatusFilters}
+          onRowClick={setPanelApplicationId}
+          onStatusChange={handleStatusChange}
+          onAddApplication={handleAddApplication}
+        />
+      </div>
+
       <ApplicationPanel
         application={panelApplication}
         onClose={() => setPanelApplicationId(null)}
