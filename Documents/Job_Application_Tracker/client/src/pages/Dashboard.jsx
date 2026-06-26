@@ -1,8 +1,9 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import Navigator from '../components/Navigator';
 import Topbar from '../components/Topbar';
 import ApplicationList from '../components/ApplicationList';
 import ApplicationPanel from '../components/ApplicationPanel';
+import AccountPanel from '../components/AccountPanel';
 import { MOCK_APPLICATIONS } from '../data/mockApplications';
 import './Dashboard.css';
 
@@ -12,6 +13,9 @@ export default function Dashboard() {
   const [selectedIds, setSelectedIds] = useState([]);
   const [statusFilters, setStatusFilters] = useState([]);
   const [panelApplicationId, setPanelApplicationId] = useState(null);
+  const [isCreatingApplication, setIsCreatingApplication] = useState(false);
+  const [showAccountPanel, setShowAccountPanel] = useState(false);
+  const [showFilterMenu, setShowFilterMenu] = useState(false);
 
   const filteredApplications = useMemo(() => {
     const query = search.toLowerCase().trim();
@@ -59,29 +63,42 @@ export default function Dashboard() {
     );
   };
 
-  const handleAddApplication = () => {
+  const handleOpenCreatePanel = useCallback(() => {
+    setPanelApplicationId(null);
+    setIsCreatingApplication(true);
+  }, []);
+
+  const handleCommitNewApplication = (newApp) => {
     const newId = Math.max(0, ...applications.map((app) => app.id)) + 1;
-    const newApp = {
-      id: newId,
-      position: 'New Position',
-      company: 'Company Name',
-      industry: '',
-      status: 'Applied',
-      interviewDate: '',
-      dateApplied: new Date().toISOString().slice(0, 10),
-      link: '',
-      notes: '',
-    };
-    setApplications((prev) => [newApp, ...prev]);
-    setPanelApplicationId(newId);
+    setApplications((prev) => [{ ...newApp, id: newId }, ...prev]);
+    setIsCreatingApplication(false);
+  };
+
+  const handleDeleteSelected = () => {
+    setApplications((prev) => prev.filter((app) => !selectedIds.includes(app.id)));
+    setSelectedIds([]);
+  };
+
+  const handleRowClick = (id) => {
+    setIsCreatingApplication(false);
+    setPanelApplicationId(id);
+  };
+
+  const handlePanelClose = () => {
+    setPanelApplicationId(null);
+    setIsCreatingApplication(false);
   };
 
   return (
     <div className="dashboard">
-      <Navigator applications={applications} onNewApplication={handleAddApplication} />
+      <Navigator applications={applications} onNewApplication={handleOpenCreatePanel} />
 
       <div className="dashboard__main">
-        <Topbar search={search} onSearchChange={setSearch} />
+        <Topbar
+          search={search}
+          onSearchChange={setSearch}
+          onManageAccount={() => setShowAccountPanel(true)}
+        />
         <ApplicationList
           applications={filteredApplications}
           selectedIds={selectedIds}
@@ -89,16 +106,26 @@ export default function Dashboard() {
           onSelectAll={handleSelectAll}
           onSelectOne={handleSelectOne}
           onStatusFiltersChange={setStatusFilters}
-          onRowClick={setPanelApplicationId}
+          onRowClick={handleRowClick}
           onStatusChange={handleStatusChange}
-          onAddApplication={handleAddApplication}
+          onDeleteSelected={handleDeleteSelected}
+          showFilterMenu={showFilterMenu}
+          onToggleFilterMenu={() => setShowFilterMenu(prev => !prev)}
         />
       </div>
 
       <ApplicationPanel
+        key={isCreatingApplication ? 'create' : panelApplicationId}
+        mode={isCreatingApplication ? 'create' : 'edit'}
         application={panelApplication}
-        onClose={() => setPanelApplicationId(null)}
+        onClose={handlePanelClose}
         onUpdate={handleUpdateApplication}
+        onCreate={handleCommitNewApplication}
+      />
+
+      <AccountPanel
+        open={showAccountPanel}
+        onClose={() => setShowAccountPanel(false)}
       />
     </div>
   );
