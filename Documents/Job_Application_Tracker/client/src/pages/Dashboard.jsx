@@ -108,7 +108,6 @@ export default function Dashboard() {
           onStatusFiltersChange={setStatusFilters}
           onRowClick={handleRowClick}
           onStatusChange={handleStatusChange}
-          onDeleteSelected={handleDeleteSelected}
           showFilterMenu={showFilterMenu}
           onToggleFilterMenu={() => setShowFilterMenu(prev => !prev)}
         />
@@ -126,6 +125,7 @@ export default function Dashboard() {
       <AccountPanel
         open={showAccountPanel}
         onClose={() => setShowAccountPanel(false)}
+        
       />
     </div>
   );
